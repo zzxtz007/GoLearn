@@ -1,23 +1,31 @@
 package print
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestPrintStr(t *testing.T) {
 	assertCorrectMessage := func(t *testing.T, got, want string) {
 		t.Helper()
 		if got != want {
-			t.Errorf("got '%q' want '%q'", got, want)
+			t.Fatalf("got '%q' want '%q' ", got, want)
 		}
-	}
 
-	t.Run("saying hello to people", func(t *testing.T) {
-		got := PrintStr("123")
-		want := "123"
+	}
+	t.Run("日本人说话", func(t *testing.T) {
+		got := PrintStr("せかい", strings.ToUpper("japanese"))
+		want := "こんにちは～せかい1"
 		assertCorrectMessage(t, got, want)
 	})
-	t.Run("empty string defaults to 'world'", func(t *testing.T) {
-		got := PrintStr("")
-		want := "Hello Wr2old"
+	t.Run("中国人说话", func(t *testing.T) {
+		got := PrintStr("世界", strings.ToUpper("chinese"))
+		want := "你好！世界1"
+		assertCorrectMessage(t, got, want)
+	})
+	t.Run("其他老外说话", func(t *testing.T) {
+		got := PrintStr("world", strings.ToUpper("english"))
+		want := "Hello world1"
 		assertCorrectMessage(t, got, want)
 	})
 
