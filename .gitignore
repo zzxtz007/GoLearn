@@ -1,3 +1,4 @@
 bin/
 .vscode
 pkg/
+src/demo_001/go.sum
